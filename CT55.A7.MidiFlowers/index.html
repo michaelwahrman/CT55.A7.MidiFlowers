@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CT55.A7 MIDI Flowers</title>
+<style>
+  :root {
+    --bar: #23222b; --bar2: #2d2c37; --ink: #f1eef6; --dim: #a9a4b8; --line: #3d3b49;
+    --rose: #f7b5c9; --peach: #ffd2a8; --butter: #f9eaa0; --mint: #b6ecd0; --sky: #b4d6f7; --lilac: #d5c2f5; --red: #ff6f7d;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: #1b1a21; color: var(--ink); font: 13px/1.3 "Segoe UI", "Helvetica Neue", Arial, sans-serif; overflow: hidden; }
+  body { display: flex; flex-direction: column; }
+  #stage { position: relative; flex: 1 1 auto; min-height: 0; background: #070b18; }
+  #c { position: absolute; inset: 0; width: 100%; height: 100%; display: block; object-fit: contain; cursor: grab; touch-action: none; }
+  #c.drag { cursor: grabbing; }
+
+  /* HUD, help, toasts: page elements over the picture -- never in the movie */
+  #hud { position: absolute; left: 12px; top: 10px; padding: 8px 11px; border-radius: 10px; background: rgba(35, 34, 43, .62); backdrop-filter: blur(4px);
+         font: 12px/1.45 ui-monospace, Consolas, Menlo, monospace; white-space: pre; pointer-events: none; color: #f4f1f8; }
+  #hud b { color: var(--butter); font-weight: 600; }
+  #hint { position: absolute; right: 12px; top: 10px; font-size: 12px; color: rgba(240, 232, 220, .75); text-align: right; pointer-events: none; line-height: 1.5; }
+  body.nohud #hud, body.nohud #hint { display: none; }
+  #toast { position: absolute; left: 50%; top: 14px; transform: translateX(-50%); max-width: min(760px, 92%); padding: 9px 14px; border-radius: 10px;
+           background: rgba(35, 34, 43, .9); color: var(--ink); font-size: 13px; opacity: 0; transition: opacity .25s; pointer-events: none; text-align: center; }
+  #toast.on { opacity: 1; }
+  #toast a { color: var(--butter); pointer-events: auto; }
+  #recDot { position: absolute; right: 14px; bottom: 12px; padding: 5px 10px; border-radius: 20px; background: rgba(35, 34, 43, .78); color: #fff; font-weight: 600; display: none; }
+  body.recording #recDot { display: block; }
+  #recDot i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--red); margin-right: 6px; animation: blink 1s steps(2) infinite; vertical-align: -1px; }
+  @keyframes blink { 50% { opacity: .25; } }
+
+  /* the button bar, lower part of the screen (outside the picture) */
+  #bar { flex: 0 0 auto; display: flex; flex-wrap: wrap; gap: 8px 9px; align-items: stretch; justify-content: center; padding: 9px 8px 8px; background: var(--bar); border-top: 1px solid var(--line); }
+  .grp { display: flex; gap: 4px; align-items: stretch; padding: 4px 6px 5px; border-radius: 11px; background: var(--bar2); position: relative; }
+  .grp > .gl { position: absolute; top: -7px; left: 10px; font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--dim); background: var(--bar); padding: 0 5px; border-radius: 4px; }
+  button { font: inherit; color: var(--ink); background: #3a3846; border: 1px solid #4a4858; border-radius: 8px; padding: 6px 9px 5px; cursor: pointer; min-width: 40px;
+           display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; user-select: none; -webkit-user-select: none; transition: background .12s, border-color .12s, transform .05s; }
+  button:hover { background: #46434f; }
+  button:active, button.hit { transform: translateY(1px); background: #504c5c; }
+  button .t { font-weight: 600; white-space: nowrap; }
+  button .m { font-size: 9.5px; color: var(--dim); white-space: nowrap; min-height: 11px; }
+  button.tog::before { content: ""; width: 26px; height: 4px; border-radius: 3px; background: #55525f; margin-bottom: 2px; }
+  button.tog.on::before { background: var(--c, var(--mint)); box-shadow: 0 0 8px var(--c, var(--mint)); }
+  button.tog.on { border-color: var(--c, var(--mint)); }
+  button.learn { outline: 2px dashed var(--butter); outline-offset: 2px; }
+  .val { display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 50px; padding: 0 2px; }
+  .val .v { font: 600 15px/1.1 ui-monospace, Consolas, Menlo, monospace; color: var(--butter); }
+  .val .u { font-size: 9.5px; color: var(--dim); }
+  button.small { min-width: 28px; padding: 4px 5px; }
+  button.small .t { font-size: 15px; line-height: 1; }
+  #b_record.on { --c: var(--red); background: #5a2f39; }
+  #b_record .t::before { content: "● "; color: var(--red); }
+
+  /* panels */
+  .panel { position: absolute; left: 12px; top: 12px; width: min(560px, 44%); max-height: calc(100% - 24px); overflow: auto; padding: 16px 20px;
+           border-radius: 14px; background: rgba(35, 34, 43, .96); color: var(--ink); box-shadow: 0 10px 40px rgba(0,0,0,.35); display: none; z-index: 5; }
+  .panel.on { display: block; }
+  .panel h2 { margin: 0 0 8px; font-size: 17px; color: var(--rose); }
+  .panel h3 { margin: 14px 0 4px; font-size: 13px; color: var(--butter); }
+  .panel p, .panel li { color: #dcd7e6; line-height: 1.5; }
+  .panel table { border-collapse: collapse; width: 100%; font-size: 12px; }
+  .panel td, .panel th { border-bottom: 1px solid #3d3b49; padding: 3px 6px; text-align: left; }
+  .panel th { color: var(--dim); font-weight: 600; }
+  .panel kbd { font: 11px ui-monospace, Consolas, monospace; background: #45424f; border-radius: 4px; padding: 1px 5px; }
+  .panel .x { position: absolute; right: 12px; top: 10px; min-width: 0; padding: 2px 9px; }
+  .panel .row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+  .panel .row button { flex-direction: row; }
+  .learned { color: var(--butter); }
+  select { font: inherit; color: var(--ink); background: #3a3846; border: 1px solid #4a4858; border-radius: 6px; padding: 3px 5px; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <canvas id="c"></canvas>
+  <div id="hud"></div>
+  <div id="hint">drag = turn the view · right-drag = move · wheel = zoom · double-click = home<br>
+    right-click a button = assign a MIDI control · <b>?</b> help · <b>H</b> hide this<br>
+    <b>Emit ✿</b> (or E) starts the flowers</div>
+  <div id="toast"></div>
+  <div id="recDot"><i></i><span id="recTime">0:00</span></div>
+
+  <div class="panel" id="helpPanel">
+    <button class="x" data-close>✕</button>
+    <h2>CT55.A7 · MIDI Flowers</h2>
+    <p>A flower emitter swirls and swoops at waist height, travelling to the right through one of three scenes — a town at night, an autumn town at Halloween,
+      a Kali shrine. Flowers gush out, swirl, fall under gravity and stay, casting soft shadows;
+      you look down at them past the chandeliers and lights. It starts already going: travelling, emitting and swirling. Click anywhere once to turn the sound on.</p>
+    <h3>Buttons (and keys)</h3>
+    <table>
+      <tr><th>Button</th><th>Key</th><th>What it does</th></tr>
+      <tr><td>Reset</td><td><kbd>Backspace</kbd></td><td>clears the flowers and starts over from the opening state: travelling, emitting and swirling (your speed / rate / pulse settings stay)</td></tr>
+      <tr><td>Forward</td><td><kbd>Space</kbd></td><td>the emitter starts / stops travelling to the right down the hall (the view follows it)</td></tr>
+      <tr><td>Slower / Faster</td><td><kbd>[</kbd> <kbd>]</kbd></td><td>travel speed, metres a second</td></tr>
+      <tr><td>Emit</td><td><kbd>E</kbd></td><td>flowers on / off (on throws a handful at once)</td></tr>
+      <tr><td>Rate − / +</td><td><kbd>-</kbd> <kbd>=</kbd></td><td>flowers a second</td></tr>
+      <tr><td>Pulse</td><td><kbd>P</kbd></td><td>a ring-shaped burst of flowers on a beat; set the beat (Every) and the size (Burst)</td></tr>
+      <tr><td>Swirl emitter</td><td><kbd>S</kbd></td><td>the emitter loops and swoops playfully up and down as it goes</td></tr>
+      <tr><td>Swirl flowers</td><td><kbd>W</kbd></td><td>a swirling eddy round the emitter plus gentle turbulence in the air: flowers spiral as they fall, and get swept up off the floor</td></tr>
+      <tr><td>◀ Scene ▶</td><td><kbd>1</kbd>–<kbd>3</kbd> <kbd>,</kbd> <kbd>.</kbd></td><td>the three scenes</td></tr>
+      <tr><td>● Record</td><td><kbd>V</kbd></td><td>starts a movie with sound; press again to stop — the MP4 downloads</td></tr>
+      <tr><td>▶ Tour</td><td><kbd>T</kbd></td><td>one press makes a movie of every scene: each plays 15 s from its opening state with the pulse joining in, fading through black, with its name; at the end the MP4 downloads (press again to stop early)</td></tr>
+    </table>
+    <h3>Camera</h3>
+    <p>Drag = turn around / tilt · right-drag (or Shift-drag) = move the view · wheel = zoom · double-click = back to the starting view. The camera stays inside the scene: it never goes through a wall, the ceiling or the floor.
+      The view follows the emitter; <kbd>F</kbd> switches following off/on. <kbd>H</kbd> hides the text over the picture, <kbd>M</kbd> mutes.</p>
+    <h3>Movies</h3>
+    <p>The movie is the picture only (not the buttons), at the picture's real pixel size, 60 frames a second (30 with the selector in the MIDI panel),
+      with the sound. It plays at the speed you see when not recording; while recording, the screen may run slower — that does not reach the movie.</p>
+  </div>
+
+  <div class="panel" id="midiPanel">
+    <button class="x" data-close>✕</button>
+    <h2>MIDI</h2>
+    <p id="midiStatus">—</p>
+    <div id="midiDevices"></div>
+    <p>Right-click any button below the picture, then press the MIDI control you want for it (Esc cancels). Learned controls are kept in this browser
+      and shown in <span class="learned">yellow</span>; the defaults come from <code>CT55.A7.MidiFlowers_midimap.js</code>.</p>
+    <div class="row">
+      <button id="midiConnect"><span class="t">Connect MIDI devices</span></button>
+      <button id="midiForget"><span class="t">Forget learned MIDI</span></button>
+      <label style="align-self:center">Movie frame rate <select id="fpsSel"><option value="60">60 fps</option><option value="30">30 fps</option></select></label>
+    </div>
+  </div>
+</div>
+
+<div id="bar">
+  <div class="grp"><span class="gl">Travel</span>
+    <button data-action="reset"><span class="t">Reset</span><span class="m"></span></button>
+    <button data-action="forward" class="tog" style="--c:var(--sky)"><span class="t">Forward ▶</span><span class="m"></span></button>
+    <button data-action="slower" class="small"><span class="t">−</span><span class="m"></span></button>
+    <div class="val"><span class="v" id="v_speed">1.5</span><span class="u">m/s speed</span></div>
+    <button data-action="faster" class="small"><span class="t">+</span><span class="m"></span></button>
+  </div>
+  <div class="grp"><span class="gl">Flowers</span>
+    <button data-action="emit" class="tog" style="--c:var(--rose)"><span class="t">Emit ✿</span><span class="m"></span></button>
+    <button data-action="rateDown" class="small"><span class="t">−</span><span class="m"></span></button>
+    <div class="val"><span class="v" id="v_rate">20</span><span class="u">flowers/s</span></div>
+    <button data-action="rateUp" class="small"><span class="t">+</span><span class="m"></span></button>
+  </div>
+  <div class="grp"><span class="gl">Pulse</span>
+    <button data-action="pulse" class="tog" style="--c:var(--butter)"><span class="t">Pulse ✺</span><span class="m"></span></button>
+    <button data-action="pulseFaster" class="small" title="shorter beat"><span class="t">−</span><span class="m"></span></button>
+    <div class="val"><span class="v" id="v_pulse">1.0</span><span class="u">s every</span></div>
+    <button data-action="pulseSlower" class="small" title="longer beat"><span class="t">+</span><span class="m"></span></button>
+    <button data-action="burstDown" class="small"><span class="t">−</span><span class="m"></span></button>
+    <div class="val"><span class="v" id="v_burst">24</span><span class="u">per burst</span></div>
+    <button data-action="burstUp" class="small"><span class="t">+</span><span class="m"></span></button>
+  </div>
+  <div class="grp"><span class="gl">Swirl</span>
+    <button data-action="swirlEmitter" class="tog" style="--c:var(--lilac)"><span class="t">Swirl emitter</span><span class="m"></span></button>
+    <button data-action="swirlFlowers" class="tog" style="--c:var(--mint)"><span class="t">Swirl flowers</span><span class="m"></span></button>
+  </div>
+  <div class="grp"><span class="gl">Movie</span>
+    <button data-action="record" id="b_record" class="tog"><span class="t">Record</span><span class="m"></span></button>
+    <button data-action="tour" class="tog" style="--c:#ffd27a" title="Records every scene, one after another, into one movie"><span class="t">▶ Tour</span><span class="m"></span></button>
+  </div>
+  <div class="grp"><span class="gl">Scene</span>
+    <button data-action="scenePrev" class="small"><span class="t">◀</span><span class="m"></span></button>
+    <div class="val" style="min-width:150px"><span class="v" id="v_scene" style="font-size:13px">1 · Town at night</span><span class="u">keys 1–3</span></div>
+    <button data-action="sceneNext" class="small"><span class="t">▶</span><span class="m"></span></button>
+  </div>
+  <div class="grp"><span class="gl">Setup</span>
+    <button id="b_midi"><span class="t">MIDI</span><span class="m" id="midiChip">off</span></button>
+    <button id="b_help"><span class="t">?</span><span class="m">help</span></button>
+  </div>
+</div>
+
+<!-- all local: three.js r186 (MIT), mp4-muxer 5.2.1 (MIT), the CT45 MIDI layer -->
+<script src="CT55.A7.MidiFlowers_lib/three.r186.min.js"></script>
+<script src="CT55.A7.MidiFlowers_lib/mp4-muxer.5.2.1.js"></script>
+<script src="CT55.A7.MidiFlowers_lib/ct45.profiles.js"></script>
+<script src="CT55.A7.MidiFlowers_lib/ct45midi.js"></script>
+<script src="CT55.A7.MidiFlowers_midimap.js"></script>
+<script src="CT55.A7.MidiFlowers_sound.js"></script>
+<script src="CT55.A7.MidiFlowers_rec.js"></script>
+<script src="CT55.A7.MidiFlowers_world.js"></script>
+<script src="CT55.A7.MidiFlowers_scene_town.js"></script>
+<script src="CT55.A7.MidiFlowers_scene_halloween.js"></script>
+<script src="CT55.A7.MidiFlowers_kali_images.js"></script>
+<script src="CT55.A7.MidiFlowers_scene_kali.js"></script>
+<script src="CT55.A7.MidiFlowers_main.js"></script>
+<script src="CT55.A7.MidiFlowers_midi.js"></script>
+</body>
+</html>

@@ -1,0 +1,642 @@
+<!doctype html><html><head><meta charset="utf-8"><title>CT55.A7.MidiFlowers — context</title><style>body{max-width:900px;margin:2em auto;padding:0 16px;font:15px/1.55 system-ui,sans-serif;background:#0e1018;color:#dde}h1,h2,h3{color:#ffd27a}code{background:#222838;padding:1px 4px}table{border-collapse:collapse}td,th{border:1px solid #334;padding:4px 8px}</style></head><body><h1>CT55.A7.MidiFlowers — context file</h1>
+<p><strong>Series:</strong> CT55 · <strong>Version:</strong> A7 · <strong>Date:</strong> 2026-10-15 · <strong>Harness:</strong> Claude harness v4
+Built from CT55.A5.MidiGraphics (there was no A6). Note the name change: MidiGraphics → <strong>MidiFlowers</strong> (all files renamed <code>CT55.A7.MidiFlowers_*</code>).</p>
+<p>To resume in a new chat: <em>"Read CT55.A7.MidiFlowers.md and continue as CT55.A8"</em>.
+Folder: <code>C:\Users\micha\Downloads\claude\CT55.A7.MidiFlowers\</code> (zip beside it). Run: double-click <code>index.html</code> (Chrome / Edge).</p>
+<h2>The user's request (CT55.A7)</h2>
+<blockquote>
+<p>Notice the name change from CT55.Ax.MidiGraphics to MidiFlowers. We can keep the two towns and the Kali Shrine.
+The camera can be a little higher maybe looking down just a little more. The flower emitter can emit many more
+flowers and swirl and circle more in all cases. In the Kali shrine, perhaps there could be hanging incense holders.</p>
+</blockquote>
+<h2>What A7 changes</h2>
+<ul>
+<li><strong>Three scenes:</strong> 1 Town at night · 2 Autumn town, Halloween · 3 Kali shrine. The Hermitage, castle and hospital
+  scene files are removed. Keys 1–3; scene buttons/pads 4–6 do nothing; the Tour now records the three scenes (≈ 45 s).</li>
+<li><strong>Camera:</strong> starts higher and looks down more — 46° down from 14.5 m (A5: 35°, 13 m). It still never goes through
+  a wall or ceiling (in the Kali shrine it comes in under the 9.5 m ceiling).</li>
+<li><strong>Many more flowers:</strong> 180 a second by default (A5: 90), new top rates 320 and 400; up to <strong>30,000</strong> at once
+  (A5: 16,000; <code>?max=</code> up to 60,000 — if the PC slows, <code>?max=15000</code>).</li>
+<li><strong>More swirl and circling, in every scene:</strong> the emitter circles on a 2.5 m loop (A5: 1.6 m), ~50 % faster, swooping a
+  little higher and lower; the room turbulence starts at strength 1.5 (A5: 1.0; the knob now goes to 3.2). The loop is
+  kept 0.7 m off the back wall so it never enters it.</li>
+<li><strong>Kali shrine: hanging incense holders</strong> — two brass censers per bay on long chains from the ceiling (domed, slotted
+  lids with ember glow showing through, three hanging chains, a spire), swinging slowly as pendulums, with thin pale
+  smoke rising and curling from each.</li>
+</ul>
+<hr />
+<h1>CT55.A5 context (still valid unless changed above)</h1>
+<h1>CT55.A7.MidiFlowers — context file</h1>
+<p><strong>Series:</strong> CT55 · <strong>Version:</strong> A5 · <strong>Date:</strong> 2026-10-14 · <strong>Harness:</strong> Claude harness v4</p>
+<p>To resume in a new chat: <em>"Read CT55.A7.MidiFlowers.md and continue as CT55.A6"</em> (or B1).
+Folder: <code>C:\Users\micha\Downloads\claude\CT55.A7.MidiFlowers\</code> (zip beside it). Run: double-click <code>index.html</code> (Chrome / Edge).</p>
+<h2>The user's request (CT55.A5)</h2>
+<blockquote>
+<p>(after A4) "how do I get a movie of the different environments in one video to send to someone who might use it"
+→ offered a Tour → "Tour yes, but I would like one button or just have you generate the video"</p>
+</blockquote>
+<h2>What A5 adds: the Tour — one button, one movie of every scene</h2>
+<ul>
+<li><strong>▶ Tour</strong> in the Movie group of the bar (key <strong>T</strong>; X-TOUCH encoder 8 push; Launchpad top-row User button; nanoKEY2
+  A# of the upper octave). One press: every scene is built first (so the take never stutters), recording starts, and
+  each of the six scenes plays <strong>15 s</strong> of movie time from its opening state (travelling, gushing, swirling), the pulse
+  joining in from 38 % to 80 % of its time, a slow camera drift, a fade from and to black, and the scene's name with
+  "CT55 · MIDI Flowers n / 6" in the lower left for the first 4 s. At the end recording stops and the <strong>MP4 downloads</strong>
+  (≈ 90 s). Press Tour (or Record) again to stop early — the movie so far is saved.</li>
+<li>Runs on the movie's own clock (like all recording since CT54.A6), so its timing in the movie is exact however slowly
+  the computer draws; size and frame rate are the recorder's (screen resolution; 60 fps, or 30 in the MIDI panel).</li>
+<li>URL options: <code>?seg=</code> seconds per scene (4–120), <code>?only=2,6</code> just those scenes, <code>?tour=1</code> start the tour on opening,
+  <code>?w=1280&amp;h=720</code> a fixed movie size (the picture is scaled to the window).</li>
+<li>The fade and the title are drawn in WebGL over the picture (<code>draw()</code>, an orthographic overlay), so they are in the movie.</li>
+</ul>
+<h2>Making the video</h2>
+<p>Press Tour on the user's own PC (its graphics card renders it at screen resolution). A render attempted in the cloud
+build container (which has no graphics card: software rendering at ~0.25 frames/s) was stopped at the user's request.</p>
+<hr />
+<h1>CT55.A4 context</h1>
+<p><em>Still valid; A5 only adds the Tour.</em></p>
+<h2>The user's request (CT55.A4)</h2>
+<blockquote>
+<p>There seems to be some sort of problem where the flowers seem to bunch against the far wall, and under the wall.
+Maybe smaller flowers and more of them, maybe a different color palette per environment.
+Instead of the final (original) medieval hallway, how about a rustic town at night in autumn like halloween with
+pumpkins and jack o lanterns.
+Finally, an environment based on the "kali*.webp" images to be found in "C:\Users\micha\Downloads\claude\Icons"</p>
+</blockquote>
+<p>(Plus the A1–A3 requests, below.)</p>
+<h2>The bunching — what caused it and the fix</h2>
+<p>Measured in A3 (landed flowers after 8 s): with Swirl flowers on and standing still, <strong>up to 54 %</strong> of the flowers lay
+within 1 m of the back wall; travelling, ~17 %. Three causes:
+1. <strong>The vortex travels with the emitter</strong>, and on its trailing side its flow pointed at the back wall, so every
+   flower left behind was swept there. A4: while travelling the vortex turns the other way (its trailing flow leads
+   out into the room) and fades out behind the emitter; standing still it eases back (<code>W.vsense</code>).
+2. <strong>The air blew through the wall.</strong> A4 uses the <em>method of images</em> — a mirror vortex behind the wall (opposite turn,
+   same inflow), so next to the wall the air runs along it, never into it; the turbulence's flow into the wall fades
+   out within 1.5 m and a slight draught leads away from it.
+3. <strong>Flowers were held only 6 cm from the wall face</strong>, so their petals went into it ("under the wall"). A4: the whole
+   flower stays in front (<code>wallZ + flower radius</code>), an air cushion slows flowers heading at the wall, they bounce off it,
+   the gush throws less toward the wall, and the emitter's line is further out (3.7–5.2 m).
+Result (test, every scene, opening state): <strong>&lt; 5 % within 1 m of the wall, none in or under it</strong> (measured 0–2 %).</p>
+<h2>Flowers</h2>
+<p>Smaller and more: <strong>13–23 cm across</strong> (A3 24–40), up to <strong>16,000</strong> at once (A3 9,000; <code>?max=</code>), <strong>90 a second</strong> by
+default (in surges); petals use fewer triangles. <strong>A palette per scene</strong> (<code>palette</code> in each scene file):</p>
+<table>
+<thead>
+<tr>
+<th>Scene</th>
+<th>Flower colours</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Town at night</td>
+<td>moonlit pastels: lavender, periwinkle, mint, pale pink, cream, lilac</td>
+</tr>
+<tr>
+<td>Hermitage</td>
+<td>court pastels: rose, peach, pale gold, powder blue, ivory, mauve</td>
+</tr>
+<tr>
+<td>Castle</td>
+<td>crimson-rose, gold, ivory, lilac, steel blue, amber</td>
+</tr>
+<tr>
+<td>Hospital</td>
+<td>nursery pastels: mint, pale yellow, baby pink, baby blue, white, sage</td>
+</tr>
+<tr>
+<td>Halloween town</td>
+<td>pumpkin orange, amber, purple, lime, cream, flame</td>
+</tr>
+<tr>
+<td>Kali shrine</td>
+<td>offerings: hibiscus red, marigold orange, saffron, jasmine white, lotus pink, vermilion</td>
+</tr>
+</tbody>
+</table>
+<h2>The scenes now (6)</h2>
+<p>1 Town at night · 2 Hermitage gallery · 3 Castle (Wolfenstein style) · 4 Abandoned hospital ·
+<strong>5 Autumn town, Halloween</strong> (new, replaces the medieval hall) · <strong>6 Kali shrine</strong> (new).
+Keys 1–6, <code>,</code> <code>.</code>; X-TOUCH LAYER A / B; Launchpad right-hand column 1–6 (7 / 8 = previous / next); nanoKEY2 C# / D#.</p>
+<ul>
+<li><strong>Autumn town, Halloween</strong> (<code>_scene_halloween.js</code>): a cobbled lane strewn with fallen leaves, a boardwalk, clapboard
+  and half-timbered cottages with steep gables, porches and crooked shutters, warm-lit windows; carved
+  <strong>jack-o'-lanterns</strong> (glowing, flickering faces; they light the street) on the steps, on hay bales and along the far
+  kerb, plain pumpkins and gourds, a scarecrow with a pumpkin head, a picket fence, bare trees with a few clinging
+  leaves; strings of orange / purple / green bulbs with tin lanterns crossing the lane below the camera; a big low
+  harvest moon, stars and drifting mist.</li>
+<li><strong>Kali shrine</strong> (<code>_scene_kali.js</code>) — from the user's <code>kali 0–6.webp</code> (<code>Icons</code> folder). <code>kali 0</code> and <code>kali 4</code> are
+  2 × 2 sheets, cut into their four pictures: <strong>13 pictures</strong>, embedded as 768 px JPEG data in
+  <code>CT55.A4.MidiFlowers_kali_images.js</code> (WebGL cannot use images loaded from <code>file://</code>; data URLs it can). Each bay: one
+  great panel and two smaller ones in stepped brass temple frames with a pointed crest and a vermilion bindi, between
+  black basalt pillars with gold bands and lotus capitals; walls painted black with radiating vermilion sunbursts
+  (the pictures' own look) above a gold dado; vermilion floor with a cream kolam; red cloth hangings; brass diyas
+  flickering along the wall; marigold garlands along the wall and swagged across the hall; tiered brass temple lamps
+  with oil flames hanging below the camera.</li>
+</ul>
+<h2>Files added / changed in A4</h2>
+<p>New: <code>_scene_halloween.js</code>, <code>_scene_kali.js</code>, <code>_kali_images.js</code>. Removed: <code>_scene_hall.js</code> (the medieval hall).
+<code>_main.js</code>: palette per scene; smaller / more flowers; wall fixes (<code>wind()</code> image vortex + wall layer, flower-size wall
+clamp, air cushion, bounce, emission bias); <code>scene6</code>. Scene files: <code>palette</code>, emitter lines further out. <code>_midimap.js</code>,
+<code>_midi.js</code>, <code>index.html</code>: six scenes.</p>
+<h2>Verified (A4, headless Chromium + SwiftShader, file://)</h2>
+<p><code>tests/test_ct55.py</code> <strong>41/41</strong>: the A3 checks (all six scenes; camera inside every scene; opening state; swoop; MIDI;
+lights; learn; gravity; turbulence; the movie) plus: the Kali shrine shows the 13 pictures; <strong>flowers do not bunch at
+the far wall (&lt; 5 % within 1 m) and none go into / under it, in every scene</strong>; each scene has its own palette. Stills:
+<code>tests/still_1_town.png</code> … <code>still_6_kali.png</code>.
+Not verifiable here: real-GPU frame rate with 16,000 flowers (if slow: <code>?max=8000</code>, <code>?shadow=1024</code>), real MIDI
+hardware, H.264 on Windows.</p>
+<hr />
+<h1>CT55.A3 context</h1>
+<p><em>Still valid except where A4 changed it above (the medieval hall is gone; scene 5 is the Halloween town, 6 the Kali
+shrine; flowers smaller, palettes per scene).</em></p>
+<h2>The user's request (CT55.A3)</h2>
+<blockquote>
+<p>The emitter should start out swirling, the flowers should swirl, and the emitter should playfully swirl up and down.
+There should be several environments including a hallway from the Hermitage, Wolfenstein, and an abandoned hospital or
+institution or hotel, maybe we are outside in a small town at night (that should be the first maybe) with moonlight.
+The flowers should gush out. We should not be able to penetrate the wall with the camera. We should be able to look
+down on the flowers and see chandeliers or light fixtures.</p>
+</blockquote>
+<p>(Plus the A1 and A2 requests, below.)</p>
+<h2>What A3 is</h2>
+<p><strong>Opening state (and what Reset returns to):</strong> the town at night, the emitter already travelling right, emitting
+(45 flowers/s, in surges), swirling, and the flowers swirling. Your speed / rate / pulse settings survive Reset.</p>
+<p><strong>Five environments</strong> (<code>◀ Scene ▶</code> in the bar, keys 1–5 and , . ; X-TOUCH LAYER A / B = previous / next;
+Launchpad right-hand column buttons 1–5 = scenes 1–5, 7 / 8 = previous / next; nanoKEY2 black keys C# / D# = previous / next):</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Scene</th>
+<th>What is in it</th>
+<th>Fixtures below the camera</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>Town at night</strong> (first)</td>
+<td>cobbled street, raised pavement, a row of old town houses (shutters, window boxes, some windows lit, shops with awnings, door lamps), moon + stars overhead, moonlight from over your shoulder</td>
+<td>iron street lamps on both kerbs and festoon strings of coloured bulbs zig-zagging across the street at 4–5 m</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Hermitage gallery</strong></td>
+<td>pale green walls, white pilasters with gilded capitals, round-headed windows with crimson drapes and gilded pelmets, paintings hung in two tiers in gilded frames, star-inlaid parquet, white-and-gold coffered ceiling, daylight through the windows</td>
+<td>a two-tier crystal chandelier in every bay (gold rings, candles, crystal drops and swags)</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Castle (Wolfenstein style)</strong></td>
+<td>big blue-grey stone blocks, studded wooden doors in arched surrounds, barred cell windows, tall red banners (a made-up crest — none of the game's insignia), shields with crossed swords, wall torches, timber ceiling beams</td>
+<td>iron cage lanterns on chains</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>Abandoned hospital</strong></td>
+<td>stained chequered linoleum, green/cream walls with peeling paint and water stains, handrail, numbered doors with wired glass (some ajar on black rooms), grimy cracked windows with grey daylight, a gurney, papers on the floor, stained tile ceiling</td>
+<td>long fluorescent fixtures on rods — some flicker (a broken starter), one is dead</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>Medieval hall</strong> (A2's)</td>
+<td>as A2, now with a timber-planked, beamed ceiling</td>
+<td>an iron wheel chandelier of 12 candles in every bay</td>
+</tr>
+</tbody>
+</table>
+<p><strong>The camera stays inside:</strong> each scene has a box (back wall, wall behind the camera, ceiling, floor); if the chosen
+view would put the camera through any of them it comes in along its line of sight, like a game camera. Panning keeps
+the target inside too. (Low ceilings therefore bring the camera closer — the hospital view is ~6.7 m away.)</p>
+<p><strong>Swirl emitter = playful:</strong> the loop breathes in and out (1.3–1.75 m), speeds up and slows, and the emitter swoops up
+and down around waist height (≈0.35–1.7 m). <strong>Swirl flowers</strong> = a swirling vortex standing on the emitter's line
+(peak 2.8 m/s round at 1.7 m radius, a lift in the middle, inflow low down — a soft dust-devil) plus A2's gentle
+turbulence: flowers spiral as they fall and get swept up off the floor. <strong>Gush:</strong> a fountain — 6–11.5 m/s, mostly
+upward in a wide cone, in surges (rate and speed pulse with a 2.7 s and 1.1 s rhythm).</p>
+<h2>How it is built (A3)</h2>
+<ul>
+<li><code>CT55.A3.MidiFlowers_world.js</code> — the manager: shared lights (hemisphere, two shadow-casting directional lights,
+  four point lights) whose colours/strengths/directions change per scene (no shader recompiles); bays (nine copies of
+  each scene's bay recycled as you travel); the 4 point lights jump to the 4 fixtures nearest the view and flicker with
+  them; helpers shared by the scenes (canvas textures, windows with holes, glass, light shafts, paintings, heraldry,
+  banners, swords, frames, chains, room = floor + ceiling + wall behind the camera).</li>
+<li><code>CT55.A3.MidiFlowers_scene_town.js</code>, <code>_scene_hermitage.js</code>, <code>_scene_castle.js</code>, <code>_scene_hospital.js</code>, <code>_scene_hall.js</code>
+  — each registers <code>{ id, name, bay, trackZ, ceiling, front, wallZ(x), floorY(x,z), camBox, light, build(ctx) }</code>.
+  Add a scene = add a file like these and a <code>&lt;script&gt;</code> line in <code>index.html</code>.</li>
+<li><code>_main.js</code>: world in (A2's <code>_hall.js</code> removed); emitter playful swirl, gush, vortex in <code>wind()</code>; camera box; scene
+  actions; ceilings and the wall behind stop flowers too; flowers land on raised floors (<code>floorY</code>).</li>
+<li><code>_midimap.js</code> / <code>_midi.js</code>: scene controls added.</li>
+</ul>
+<h2>Verified (A3, headless Chromium + SwiftShader, file://)</h2>
+<p><code>tests/test_ct55.py</code> <strong>37/37</strong>: opens in the town already travelling / emitting / swirling; flowers gush from the start;
+the emitter swoops (≥0.5 m up and down); all five scenes load; <strong>the camera stays inside every scene</strong> when zoomed out
+to 60 m and turned to face the wall behind, and when tilted below the floor; X-TOUCH LAYER B, Launchpad side 4 and key 1
+switch scenes; Reset returns to the opening state; plus every A1/A2 check (MIDI, lights, learn, gravity, turbulence, the
+movie: size, constant fps, duration, sound, decoding, exactly 1/fps per frame). Stills of every scene:
+<code>tests/still_1_town.png</code> … <code>still_5_hall.png</code>.
+Not verifiable here: real-GPU frame rate (each scene has many small meshes, two 2048 VSM maps and four point lights;
+<code>?shadow=1024</code> lightens it), real MIDI hardware, H.264 on Windows.</p>
+<h2>Ideas for A4 (not requested)</h2>
+<p>Scene-specific sound beds (night crickets and a distant bell, palace echo, dungeon drips, hospital hum); rain in the
+town; snow instead of flowers; per-scene flower palettes; a cross-fade between scenes.</p>
+<hr />
+<h1>CT55.A2 context</h1>
+<p><em>Still valid except where A3 changed it above.</em></p>
+<h2>The user's request (CT55.A2)</h2>
+<blockquote>
+<p>CT55.A2.MidiFlowers — We should be scrolling sideways down a long hall. There are windows on the back wall, and
+medieval attributes, swords, paintings, etc. The flowers should be affected by gravity. The emitter should be waist
+height. The flowers should billow out and fall to the floor. The swirl should be like a gentle turbulence in the room.</p>
+</blockquote>
+<p>(Plus the whole A1 request, below. Before A2 the user reported for A1: <strong>"Unfortunately no flowers are emitted"</strong>.)</p>
+<h2>A1's "no flowers" — the cause, fixed in A2</h2>
+<p>On the first run A1 opened its help panel automatically, <strong>in the middle of the picture, right over the emitter</strong>: every
+flower was hidden behind it (reproduced at 1920×1000: emitting worked, 22 flowers, all behind the panel). The tests
+never saw it because they pre-set "help seen". A2: no panel opens at start (help only with <strong>?</strong>), the help panel is
+docked at the left and narrower, a note top-right says <em>"Emit ✿ (or E) starts the flowers"</em>, any script error now
+shows on screen, and the test checks that nothing covers the picture at start.
+Also: <strong>Emit is now a plain on/off switch</strong> (A1's tap = latch / hold = while-held rule could look like "nothing" after a
+slow press), and switching it on throws 8 flowers at once.</p>
+<h2>What A2 is</h2>
+<ul>
+<li><strong>The hall</strong> (<code>CT55.A2.MidiFlowers_hall.js</code>, all procedural, nothing loaded): stone flagstone floor; back wall of
+  ashlar along x (face at z = 0, 10 m high) built of 7 m <strong>bays</strong>. Each bay: a tall pointed-arch <strong>window</strong> (leaded
+  diamond-pane glass, stone mullion + transom, sill); a stone <strong>pilaster</strong> with an iron-bracket <strong>torch</strong> (flickering
+  flame + glow; the 3 torches nearest the view are real point lights); every other pilaster a swallow-tailed heraldic
+  <strong>banner</strong> high up; and either side of the window a gold-framed <strong>painting</strong> (landscapes with castles, portraits) or a
+  painted <strong>heraldic shield with two crossed swords</strong> (cross / chevron / per pale / bend + star). Nine bay sets are
+  recycled as you travel, so the hall never ends.</li>
+<li><strong>Light</strong>: sunlight from behind the wall comes through the windows (a shadow-casting light: bright window-shaped
+  patches with mullion shadows on the floor) with faint dusty <strong>light shafts</strong>; a soft overhead light (also
+  shadow-casting, VSM blur radius 9) gives every flower a <strong>soft shadow</strong> anywhere on the floor; warm torchlight; dark
+  far end (fog).</li>
+<li><strong>View</strong>: from the open side, 35° down at the floor in front of the wall, 13 m away; it scrolls sideways (+x) with the
+  emitter. Mouse as in A1 (drag turn/tilt, right-drag move, wheel zoom, double-click home).</li>
+<li><strong>Emitter</strong>: at <strong>waist height (0.95 m)</strong>, travelling 3.2 m out from the wall; <em>Swirl emitter</em> loops it in 1.6 m
+  circles around that line.</li>
+<li><strong>Gravity + billow</strong>: flowers leave at 5–9.5 m/s in every direction above the horizontal; <strong>quadratic air drag</strong>
+  relative to the air (a = g − k|v−u|(v−u), k 0.7–1.1 per flower, so they fall at most 3.0–3.7 m/s) stops them within
+  about 2 m — they <strong>billow out</strong> into a cloud, then <strong>gravity</strong> brings them down; while falling they flutter and tumble,
+  land, slide a little and stay. They bounce off the back wall. Pulse = a ring of 8–10 m/s flowers billowing out (with
+  a subtle ripple on the floor).</li>
+<li><strong>Swirl flowers = a gentle turbulence in the room</strong>: the air moves in eddies — two Arnold–Beltrami–Childress flows
+  (divergence-free like real air), ~11 m and ~4.6 m across, changing slowly and drifting down the hall; peak about
+  1–2 m/s × strength (X-TOUCH knob 5). Flowers in the air drift and eddy with it; where it gusts along the floor it lifts
+  flowers that have landed (they hop up, tumble and settle again). A soft wind sound follows it.</li>
+<li>Flowers: 24–40 cm across, a third more self-glow than A1 so the pastels stay bright in the dim hall.</li>
+</ul>
+<h2>Files added / changed in A2</h2>
+<p><code>CT55.A2.MidiFlowers_hall.js</code> (new); <code>_main.js</code> (hall in, A1 floor/sun out; physics rewritten: <code>wind()</code>,
+<code>stepFlowers()</code>; emission; camera; Emit switch; error toasts; no help at start); <code>index.html</code> (hall script, help text,
+docked help panel, dark stage); <code>tests/test_ct55.py</code> (new checks). MIDI map, sound, recorder unchanged apart from names.</p>
+<h2>Verified (A2, headless Chromium + SwiftShader, file://)</h2>
+<p><code>tests/test_ct55.py</code> <strong>30/30</strong>: A1's checks (MIDI on all three devices, lights, learn, the movie: size, constant fps,
+duration, sound, decoding, exact 1/fps per movie frame) plus: nothing covers the picture at start; Emit on by click
+shows flowers at once; key E switches it off; <strong>gravity</strong> — with nothing emitting every flower is on the floor within 5 s;
+<strong>turbulence</strong> lifts landed flowers; emitter at waist height in front of the wall. Stills: <code>tests/still_hall.png</code>,
+<code>still_billow.png</code>, <code>still_turbulence.png</code>, <code>still_closeup.png</code>.
+Not verifiable here: real-GPU frame rate (two 2048 VSM shadow maps + 3 point lights; <code>?shadow=1024</code> lightens it), real
+MIDI hardware, H.264 on Windows.</p>
+<h2>Ideas for A3 (not requested)</h2>
+<p>A ceiling with timber beams / chandeliers; suits of armour between bays; flowers that drift through the sun patches
+glowing; a camera that can also face down the hall.</p>
+<hr />
+<h1>CT55.A1 context</h1>
+<p><em>Still valid except where A2 changed it above: Emit is now a plain switch; Swirl flowers is now the room turbulence; the scene is the hall; emitter height 0.95 m.</em></p>
+<p>To resume in a new chat: <em>"Read CT55.A1.MidiFlowers.md and continue as CT55.A1"</em> (or B1).
+Folder: <code>C:\Users\micha\Downloads\claude\CT55.A1.MidiFlowers\</code> (zip beside it).</p>
+<h2>The user's request (CT55.A1)</h2>
+<blockquote>
+<p>This is a browser based, WebGL, three.js application. It operates in real time, but there is a button to start video
+recording. See all the problems of video recording from CT54. It should use the Midi device control from CT45.</p>
+<p>On midi: a button to reset; a button to go forward (to the right, horizontally); a button which when hit increases the
+speed of going forward; a button which when hit reduces the speed; a button which emits flowers from the emitter, which
+is travelling to the right; a button which swirls the emitter; a button which starts the flowers swirling.</p>
+<p>The emitted flowers are colorful, bright, pastel, do soft shadows onto the floor. We are looking down to the floor.
+Buttons on the lower part of the screen to use when midi is not there. Can adjust camera point of view with the mouse.
+A button to increase flower emission rate; a button to decrease flower emission rate. A pulse emitter which when started
+emits the flowers on a pulse (to be set). A button to start recording video with audio, and stop it when hit again.</p>
+</blockquote>
+<h2>How to run</h2>
+<ol>
+<li>Double-click <code>index.html</code> → Chrome or Edge (Web MIDI and the movie encoder need a Chromium browser; Firefox can view
+   but not use MIDI or record).</li>
+<li>Chrome asks to allow MIDI ("control and reprogram MIDI devices" = sysex, for full Launchpad colours). Allow it.
+   If you said no, the <strong>MIDI</strong> button (bottom right) → <em>Connect MIDI devices</em> asks again.</li>
+<li>Click anywhere once to switch the sound on (browsers require a click before sound).</li>
+<li>Plug the controllers into <strong>Windows</strong>; close other programs using them (Windows lets one program open a MIDI port).
+   Hot-plug works (CT45 rescans).</li>
+</ol>
+<p>Nothing comes from the internet: three.js r186, mp4-muxer 5.2.1 and the CT45 layer are in <code>CT55.A1.MidiFlowers_lib/</code>.</p>
+<h2>What you see</h2>
+<p>A flower emitter (a glowing pearl with a turning crown of pastel petals) floats 1.15 m above a pale paper-tiled floor.
+The view looks down on the floor (69° down, 15 m away) and follows the emitter as it travels right (+x); the emitter sits
+a little right of centre so the trail of flowers fills the left of the picture.
+Flowers (3 kinds: 5-petal blossom, 6-petal star, 12+12-petal daisy; bright pastel colours, yellow/cream centres, slightly
+self-lit so they read as bright) are thrown up out of the emitter, flutter down like petals (drag, sway, tilt, spin),
+land, slide a little and stay. All cast <strong>soft shadows</strong> (VSM shadow map, blurred), both in the air and on the floor.</p>
+<h2>Controls (the same actions from screen, keyboard and MIDI)</h2>
+<table>
+<thead>
+<tr>
+<th>Button (bottom bar)</th>
+<th>Key</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Reset</td>
+<td>Backspace</td>
+<td>clears flowers, emitter and view home, everything off; <strong>speed/rate/pulse settings are kept</strong></td>
+</tr>
+<tr>
+<td>Forward ▶</td>
+<td>Space</td>
+<td>toggles travelling right</td>
+</tr>
+<tr>
+<td>− / + (Travel)</td>
+<td><code>[</code> <code>]</code></td>
+<td>speed steps 0.25 … 8 m/s (default 1.5)</td>
+</tr>
+<tr>
+<td>Emit ✿</td>
+<td>E</td>
+<td><strong>tap</strong> = latch on/off; <strong>hold</strong> (&gt;0.35 s) = emit only while held</td>
+</tr>
+<tr>
+<td>− / + (Flowers)</td>
+<td><code>-</code> <code>=</code></td>
+<td>rate steps 1 … 240 flowers/s (default 20)</td>
+</tr>
+<tr>
+<td>Pulse ✺</td>
+<td>P</td>
+<td>toggles the pulse emitter: a ring burst of flowers on a beat, first burst at once; a pastel ring spreads on the floor</td>
+</tr>
+<tr>
+<td>− / + s every</td>
+<td></td>
+<td>beat 0.25 … 4 s (default 1.0)</td>
+</tr>
+<tr>
+<td>− / + per burst</td>
+<td></td>
+<td>6 … 100 flowers per burst (default 24)</td>
+</tr>
+<tr>
+<td>Swirl emitter</td>
+<td>S</td>
+<td>the emitter loops in 2.2 m circles around its track (eases in/out), so its trail becomes loops</td>
+</tr>
+<tr>
+<td>Swirl flowers</td>
+<td>W</td>
+<td>a whirlwind around the emitter: airborne flowers within 5.5 m are caught at once, flowers on the floor are lifted gradually; each circles at its own radius/height; off = they flutter down again</td>
+</tr>
+<tr>
+<td>● Record</td>
+<td>V</td>
+<td>movie with sound; press again to stop → MP4 downloads</td>
+</tr>
+<tr>
+<td>MIDI</td>
+<td></td>
+<td>MIDI panel: devices, assignments, connect, forget learned, movie frame rate (60/30)</td>
+</tr>
+<tr>
+<td>?</td>
+<td>?</td>
+<td>help</td>
+</tr>
+<tr>
+<td>—</td>
+<td>H</td>
+<td>hide the text over the picture · F follow on/off · M mute · Esc closes panels / cancels MIDI learn</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Mouse:</strong> drag = turn / tilt · right-drag (or Shift-drag, or middle) = move the view · wheel = zoom (2.5–120 m) ·
+double-click = home view.</p>
+<h2>MIDI (uses CT45.A1.USB unchanged: <code>lib/ct45midi.js</code>, <code>lib/ct45.profiles.js</code>)</h2>
+<p>Default map: <code>CT55.A1.MidiFlowers_midimap.js</code> (JSON inside <code>window.CT55_MIDIMAP = …</code> so it loads from file://).</p>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>X-TOUCH MINI (MC mode)</th>
+<th>Launchpad Mini (MK3 or original)</th>
+<th>nanoKEY2 (default octave)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Reset</td>
+<td>top 1</td>
+<td>row 1 col 1</td>
+<td>C</td>
+</tr>
+<tr>
+<td>Forward</td>
+<td>top 2</td>
+<td>r1 c2</td>
+<td>D</td>
+</tr>
+<tr>
+<td>Slower / Faster</td>
+<td>top 3 / top 4</td>
+<td>r1 c3 / c4</td>
+<td>E / F</td>
+</tr>
+<tr>
+<td>Emit</td>
+<td>top 5</td>
+<td>r1 c5</td>
+<td>G (also MOD)</td>
+</tr>
+<tr>
+<td>Swirl emitter</td>
+<td>top 6</td>
+<td>r1 c6</td>
+<td>A</td>
+</tr>
+<tr>
+<td>Swirl flowers</td>
+<td>top 7</td>
+<td>r1 c7</td>
+<td>B</td>
+</tr>
+<tr>
+<td>Record</td>
+<td>top 8</td>
+<td>r1 c8</td>
+<td>top C</td>
+</tr>
+<tr>
+<td>Rate − / +</td>
+<td>bottom 1 / 2</td>
+<td>r2 c1 / c2</td>
+<td>C' / D'</td>
+</tr>
+<tr>
+<td>Pulse</td>
+<td>bottom 3</td>
+<td>r2 c3</td>
+<td>E'</td>
+</tr>
+<tr>
+<td>Pulse beat longer / shorter</td>
+<td>bottom 4 / 5</td>
+<td>r2 c4 / c5</td>
+<td>F' / G'</td>
+</tr>
+<tr>
+<td>Burst − / +</td>
+<td>bottom 6 / 7</td>
+<td>r2 c6 / c7</td>
+<td>A' / B'</td>
+</tr>
+<tr>
+<td>Show/hide text</td>
+<td>bottom 8</td>
+<td>r2 c8</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Speed / rate / pulse beat / burst / swirl strength</td>
+<td>encoders 1–5 (fader = rate)</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Lights:</strong> X-TOUCH button LEDs on when that switch is on (Record blinks); encoder rings 1–5 show the settings
+  (<code>autoRing</code> off). Launchpad pads show each action in its own colour, bright when on, dim when off.</li>
+<li><strong>Learn:</strong> right-click an on-screen button, press (or turn) any MIDI control → assigned; encoders turned while learning a
+  ± button get the matching value control. Saved in the browser (<code>localStorage</code> key <code>CT55.midimap.learned</code>), shown in
+  yellow in the MIDI panel, overriding the file; <em>Forget learned MIDI</em> clears them. Works for unknown devices (CT45 generic).</li>
+<li>The small grey text under each on-screen button names its MIDI control on the connected devices (e.g. <code>XT top2 · LP r1c2</code>).</li>
+</ul>
+<h2>The movie (every CT54 movie problem, solved the way CT54.A6 solved it)</h2>
+<table>
+<thead>
+<tr>
+<th>CT54 problem</th>
+<th>CT55</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ffmpeg / server / batch file failed on Windows</td>
+<td>none: WebCodecs in the page → MP4 (mp4-muxer) → downloaded to your Downloads folder</td>
+</tr>
+<tr>
+<td>movie at the wrong (fast) speed</td>
+<td>constant frame rate, frame i = i/fps; while recording each drawn frame advances the scene <strong>exactly</strong> 1/fps, so the movie plays at the speed the screen shows when not recording (the screen itself may slow while recording; that does not reach the movie) — tested</td>
+</tr>
+<tr>
+<td>low resolution / soft</td>
+<td>the picture's real device-pixel size (window × devicePixelRatio, even, ≤ 3840×2160) is the movie size; constant-quality software H.264 first (<code>?q=18</code>), then high-bit-rate H.264 profiles, then VP9; each must encode a test frame first</td>
+</tr>
+<tr>
+<td>no audio</td>
+<td>the <strong>same</strong> software synth plays the speakers and the movie: each frame renders exactly 48000/fps samples → AAC (else Opus), locked to the picture; while recording, you hear those same samples</td>
+</tr>
+<tr>
+<td>page blank / waiting on the recorder</td>
+<td>recorder prepared in the background with time limits; size changes re-check it</td>
+</tr>
+<tr>
+<td>buttons / text in the movie</td>
+<td>the movie is the canvas only; buttons, HUD, help, toasts are page elements</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>60 fps by default (smooth falling flowers); 30 fps in the MIDI panel or <code>?fps=30</code>. The window size is locked during a
+  take (the picture is CSS-scaled if you resize).</li>
+<li>The HUD line shows the encoder, size, fps and the actual Mbit/s while recording.</li>
+<li>URL options: <code>?q=</code> quality (lower = sharper), <code>?mbps=</code>, <code>?encoder=hw</code>, <code>?fps=30</code>, <code>?shadow=4096</code> (shadow map size;
+  default 2048), <code>?max=</code> flower count (default 9000), <code>?midi=0</code> (don't ask for MIDI at start).</li>
+</ul>
+<h2>Sound (<code>_sound.js</code>)</h2>
+<p>Pastel bells in C-major pentatonic for flowers (at most ~7 a second, panned to where the emitter is on screen); the pulse =
+a 3-note bell chord + a soft low thump; swirling flowers make a band-passed wind (louder with more flowers and strength;
+a little with travel speed). Not a microphone: "video with audio" = the app's own sound (ask in A2 if a mic was meant).</p>
+<h2>Files</h2>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>index.html</code></td>
+<td>the app (canvas + bottom button bar + panels)</td>
+</tr>
+<tr>
+<td><code>CT55.A1.MidiFlowers_main.js</code></td>
+<td>scene, floor, flowers (InstancedMesh ×3 kinds, petals + centres share matrices), physics, emitter, camera, actions, frame loop</td>
+</tr>
+<tr>
+<td><code>CT55.A1.MidiFlowers_midi.js</code></td>
+<td>CT45 hub → actions, lights, learn, MIDI panel</td>
+</tr>
+<tr>
+<td><code>CT55.A1.MidiFlowers_midimap.js</code></td>
+<td>default MIDI map (edit this to change defaults)</td>
+</tr>
+<tr>
+<td><code>CT55.A1.MidiFlowers_sound.js</code></td>
+<td>software synth + speaker (live pull / recording queue)</td>
+</tr>
+<tr>
+<td><code>CT55.A1.MidiFlowers_rec.js</code></td>
+<td>recorder (from CT54.A6, now per-take objects, fps-aware H.264 levels)</td>
+</tr>
+<tr>
+<td><code>CT55.A1.MidiFlowers_lib/</code></td>
+<td>three.r186.min.js, mp4-muxer 5.2.1, ct45midi.js, ct45.profiles.js, licences</td>
+</tr>
+<tr>
+<td><code>tests/test_ct55.py</code></td>
+<td>Playwright self-test with fake Web MIDI (CT45's) + real recording + ffprobe</td>
+</tr>
+<tr>
+<td><code>tests/*.png</code></td>
+<td>screenshots (<code>shot_*.png</code> from the test, <code>still_*.png</code> stills)</td>
+</tr>
+</tbody>
+</table>
+<h2>Design notes</h2>
+<ul>
+<li>Flower state is structure-of-arrays (<code>F.*</code>), states 0 empty / 1 air / 2 landed / 3 swirling; three ring buffers (one
+  per kind) recycle the oldest flower when 9000 are out. Air: gravity, drag 0.9/s up, 6.5/s down (≈1.5 m/s fall),
+  sinusoidal sway + matching tilt. Swirl: velocity eased toward tangential ω·r with ω = 1.9·strength/(1+0.22 r), plus
+  pull to each flower's own radius (0.7–4.5 m) and height (0.35–3.75 m), plus the travel velocity, centred on the
+  emitter's track point.</li>
+<li>Floor 640 m plane that jumps in whole 4 m tiles under the view (pattern stays put); shadow box and sun follow the view.</li>
+<li><code>NeutralToneMapping</code>, sRGB output; flowers get 20 % of their own colour as emission (bright pastel under shadow).</li>
+<li>All actions go through <code>CT55.act(name, phase)</code>; value controls through <code>CT55.setValue(name, {delta}|{value})</code>.</li>
+</ul>
+<h2>Verified (2026-10-14, headless Chromium, SwiftShader, from file://)</h2>
+<p><code>tests/test_ct55.py</code>: <strong>26/26 pass</strong> — the three devices detected under their Windows port names; X-TOUCH top2 →
+Forward + LED; tap-latch Emit; flowers emitted; knob 1 → speed + ring; Launchpad pads → Swirl flowers, Pulse + RGB sysex;
+nanoKEY2 A → Swirl emitter; the whirlwind lifts flowers; on-screen Rate +; Emit hold-while-held; MIDI learn + the learned
+control works; a recorded movie: picture size, constant 60 fps, duration = frames/fps, sound of the same length and not
+silent, every frame decodes; scene advance = exactly 1/fps per movie frame; no page errors.
+The test machine had VP9 + Opus only (no H.264 in that Chromium); Chrome/Edge on Windows will choose H.264 + AAC.</p>
+<p><strong>Not verified here:</strong> real MIDI hardware (CT45's maps are still unconfirmed on hardware), real-GPU frame rate
+(SwiftShader is far too slow to judge; the JS physics costs ~0.35 ms per step with 9,000 flowers), H.264 on Windows.</p>
+<h2>Ideas for A2 (not requested)</h2>
+<ul>
+<li>Microphone mixed into the movie, if that is what "with audio" meant.</li>
+<li>More flower kinds / leaves; a palette selector; flowers that fade after N minutes.</li>
+<li>Pulse synced to MIDI clock or to a nanoKEY tempo tap.</li>
+<li>A small 3D picture of each connected controller (CT45 <code>ct45view.js</code>) in a corner.</li>
+</ul></body></html>
